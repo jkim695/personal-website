@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Github, ExternalLink, Mail, Linkedin, Download, ChevronDown } from 'lucide-react';
 import heroImage from '@/assets/hero-image.jpg';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('about');
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const scrollStoryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observeElements = () => {
@@ -23,8 +25,41 @@ const Index = () => {
       return () => observer.disconnect();
     };
 
+    const handleScrollStory = () => {
+      if (!videoRef.current || !scrollStoryRef.current) return;
+      
+      const video = videoRef.current;
+      const container = scrollStoryRef.current;
+      const containerRect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculate scroll progress through the scroll story section
+      const scrollTop = window.scrollY;
+      const containerTop = container.offsetTop;
+      const containerHeight = container.offsetHeight;
+      
+      // Progress: 0 when container top hits bottom of viewport, 1 when container bottom hits top of viewport
+      const progress = Math.max(0, Math.min(1, 
+        (scrollTop - containerTop + windowHeight) / (containerHeight + windowHeight)
+      ));
+      
+      // Update video currentTime based on scroll progress
+      if (video.duration) {
+        video.currentTime = progress * video.duration;
+      }
+      
+      // Update text animations based on scroll progress
+      const textElements = container.querySelectorAll('.scroll-text');
+      textElements.forEach((element, index) => {
+        const textProgress = Math.max(0, Math.min(1, (progress - index * 0.2) * 2));
+        const opacity = textProgress > 0.5 ? Math.max(0, 2 - textProgress * 2) : textProgress * 2;
+        (element as HTMLElement).style.opacity = opacity.toString();
+        (element as HTMLElement).style.transform = `translateY(${(1 - textProgress) * 30}px)`;
+      });
+    };
+
     const handleScroll = () => {
-      const sections = ['about', 'experience', 'projects', 'contact'];
+      const sections = ['about', 'scroll-story', 'experience', 'projects', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -34,6 +69,8 @@ const Index = () => {
         return false;
       });
       if (current) setActiveSection(current);
+      
+      handleScrollStory();
     };
 
     const cleanup = observeElements();
@@ -119,6 +156,65 @@ const Index = () => {
         
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <ChevronDown className="text-text-tertiary" size={24} />
+        </div>
+      </section>
+
+      {/* Scroll Story Section */}
+      <section id="scroll-story" className="relative" ref={scrollStoryRef}>
+        <div className="h-[300vh] relative">
+          {/* Video Container */}
+          <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black">
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover"
+              muted
+              playsInline
+              preload="metadata"
+            >
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+            </video>
+            
+            {/* Overlay Text */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center text-white max-w-4xl px-8">
+                <div className="scroll-text opacity-0">
+                  <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                    Innovation
+                  </h2>
+                  <p className="text-xl md:text-2xl">
+                    Through creative problem-solving and cutting-edge technology
+                  </p>
+                </div>
+                
+                <div className="scroll-text opacity-0">
+                  <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                    Performance
+                  </h2>
+                  <p className="text-xl md:text-2xl">
+                    Optimized solutions that scale with your business needs
+                  </p>
+                </div>
+                
+                <div className="scroll-text opacity-0">
+                  <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                    Excellence
+                  </h2>
+                  <p className="text-xl md:text-2xl">
+                    Delivering exceptional user experiences with every line of code
+                  </p>
+                </div>
+                
+                <div className="scroll-text opacity-0">
+                  <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                    Impact
+                  </h2>
+                  <p className="text-xl md:text-2xl">
+                    Building solutions that make a difference in people's lives
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
