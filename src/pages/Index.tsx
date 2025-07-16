@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { Github, ExternalLink, Mail, Linkedin, Download, ChevronDown, Menu, X, Home } from 'lucide-react';
 import heroImage from '@/assets/hero-image.png';
-import microsoftLogo from '@/assets/microsoft.png';
+import microsoftLogo from '@/assets/Microsoft.png';
 import uwLogo from '@/assets/UW.jpg';
 import hopkinsLogo from '@/assets/hopkins_logo.png';
 
