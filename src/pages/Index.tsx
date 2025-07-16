@@ -43,18 +43,46 @@ const Index = () => {
         (scrollTop - containerTop + windowHeight) / (containerHeight + windowHeight)
       ));
       
-      // Update video currentTime based on scroll progress
-      if (video.duration) {
-        video.currentTime = progress * video.duration;
+      // Frame-precise video control
+      if (video.duration && video.readyState >= 2) {
+        const targetTime = progress * video.duration;
+        // Only update if the difference is significant enough (prevents jitter)
+        if (Math.abs(video.currentTime - targetTime) > 0.1) {
+          video.currentTime = targetTime;
+        }
       }
       
-      // Update text animations based on scroll progress
+      // Update text animations with gaps between sections
       const textElements = container.querySelectorAll('.scroll-text');
       textElements.forEach((element, index) => {
-        const textProgress = Math.max(0, Math.min(1, (progress - index * 0.2) * 2));
-        const opacity = textProgress > 0.5 ? Math.max(0, 2 - textProgress * 2) : textProgress * 2;
+        // Each text section gets 20% of scroll progress with 10% gaps
+        const sectionStart = index * 0.25; // Start of this section (25% intervals for gaps)
+        const sectionEnd = sectionStart + 0.15; // Each section lasts 15% (leaving 10% gap)
+        
+        let opacity = 0;
+        let translateY = 30;
+        
+        if (progress >= sectionStart && progress <= sectionEnd) {
+          // Fade in/out within the section duration
+          const sectionProgress = (progress - sectionStart) / 0.15;
+          
+          if (sectionProgress <= 0.3) {
+            // Fade in (first 30% of section)
+            opacity = sectionProgress / 0.3;
+            translateY = 30 * (1 - opacity);
+          } else if (sectionProgress >= 0.7) {
+            // Fade out (last 30% of section)
+            opacity = (1 - sectionProgress) / 0.3;
+            translateY = 30 * (1 - opacity);
+          } else {
+            // Fully visible (middle 40% of section)
+            opacity = 1;
+            translateY = 0;
+          }
+        }
+        
         (element as HTMLElement).style.opacity = opacity.toString();
-        (element as HTMLElement).style.transform = `translateY(${(1 - textProgress) * 30}px)`;
+        (element as HTMLElement).style.transform = `translate(-50%, -50%) translateY(${translateY}px)`;
       });
     };
 
@@ -73,7 +101,18 @@ const Index = () => {
       handleScrollStory();
     };
 
+    // Initialize video when it loads
+    const initializeVideo = () => {
+      if (videoRef.current) {
+        const video = videoRef.current;
+        video.addEventListener('loadeddata', () => {
+          video.currentTime = 0;
+        });
+      }
+    };
+
     const cleanup = observeElements();
+    initializeVideo();
     window.addEventListener('scroll', handleScroll);
     return () => {
       cleanup();
@@ -161,7 +200,7 @@ const Index = () => {
 
       {/* Scroll Story Section */}
       <section id="scroll-story" className="relative" ref={scrollStoryRef}>
-        <div className="h-[300vh] relative">
+        <div className="h-[400vh] relative">{/* Increased height for better control */}
           {/* Video Container */}
           <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black">
             <video

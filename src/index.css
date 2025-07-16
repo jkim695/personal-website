@@ -235,10 +235,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: none; /* Remove transitions for smoother scroll-driven animation */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
