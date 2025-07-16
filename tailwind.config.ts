@@ -19,49 +19,41 @@ export default {
 		},
 		extend: {
 			colors: {
-				border: 'hsl(var(--border))',
-				input: 'hsl(var(--input))',
-				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+				surface: {
+					DEFAULT: 'hsl(var(--surface))',
+					secondary: 'hsl(var(--surface-secondary))',
+					tertiary: 'hsl(var(--surface-tertiary))'
 				},
-				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))'
-				},
-				destructive: {
-					DEFAULT: 'hsl(var(--destructive))',
-					foreground: 'hsl(var(--destructive-foreground))'
-				},
-				muted: {
-					DEFAULT: 'hsl(var(--muted))',
-					foreground: 'hsl(var(--muted-foreground))'
+				text: {
+					primary: 'hsl(var(--text-primary))',
+					secondary: 'hsl(var(--text-secondary))',
+					tertiary: 'hsl(var(--text-tertiary))'
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
+					muted: 'hsl(var(--accent-muted))',
 					foreground: 'hsl(var(--accent-foreground))'
 				},
-				popover: {
-					DEFAULT: 'hsl(var(--popover))',
-					foreground: 'hsl(var(--popover-foreground))'
+				border: {
+					DEFAULT: 'hsl(var(--border))',
+					light: 'hsl(var(--border-light))'
 				},
-				card: {
-					DEFAULT: 'hsl(var(--card))',
-					foreground: 'hsl(var(--card-foreground))'
-				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+				glass: {
+					bg: 'hsl(var(--glass-bg))',
+					border: 'hsl(var(--glass-border))'
 				}
+			},
+			fontFamily: {
+				inter: ['Inter', 'sans-serif'],
+			},
+			boxShadow: {
+				'apple-sm': 'var(--shadow-sm)',
+				'apple-md': 'var(--shadow-md)',
+				'apple-lg': 'var(--shadow-lg)',
+				'apple-xl': 'var(--shadow-xl)',
+				'apple-2xl': 'var(--shadow-2xl)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
