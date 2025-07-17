@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joshua A. Kim - Software Engineer & Creative Problem Solver</title>
+    <meta name="description" content="Computer Science student passionate about building elegant solutions to complex problems. Portfolio showcasing experience and projects." />
+    <meta name="author" content="Joshua A. Kim" />
+
+    <meta property="og:title" content="Joshua A. Kim - Software Engineer & Creative Problem Solver" />
+    <meta property="og:description" content="Computer Science student passionate about building elegant solutions to complex problems. Portfolio showcasing experience and projects." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <script>
+      // Redirect to hash router for GitHub Pages compatibility
+      var pathSegmentsToKeep = 1;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + 
+        '/#' + 
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
