@@ -658,7 +658,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
                   <div className="flex-1">
                     <div className="mb-6">
                       <div className="inline-block bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
-                        Expected May 2026
+                        Expected May 2027
                       </div>
                       <h3 className="text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
                         Bachelor of Science, Computer Science
