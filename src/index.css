@@ -566,6 +566,42 @@
     transform: scale(1.2) rotate(5deg);
   }
   
+  /* Timeline Experience Animations */
+  .timeline-entry {
+    position: relative;
+  }
+  
+  .timeline-card-modern {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .timeline-card-modern:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .timeline-expandable-content {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .timeline-card-modern:hover .timeline-expandable-content {
+    max-height: 400px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Mobile responsive timeline adjustments */
+  @media (max-width: 768px) {
+    .timeline-card-modern:active .timeline-expandable-content {
+      max-height: 400px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* Modal animations */
   .modal-backdrop {
     animation: fadeIn 0.3s ease-out;
