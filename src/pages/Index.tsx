@@ -101,7 +101,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
       // Detect low performance devices
       const isLowPerf = 
         navigator.hardwareConcurrency <= 2 || // Low CPU cores
-        navigator.deviceMemory <= 4 || // Low RAM
+        (navigator as any).deviceMemory <= 4 || // Low RAM
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); // Mobile devices
       
       setIsLowPerfDevice(isLowPerf);
@@ -521,8 +521,8 @@ The app architecture follows iOS best practices with clean, modular code organiz
           <div className="max-w-6xl mx-auto">
             <div className="timeline">
               {/* Experience Item 1 */}
-              <div className="timeline-item fade-in">
-                <div className="timeline-card">
+              <div className="timeline-item fade-in group">
+                <div className="timeline-card hover:scale-105 transition-all duration-300">
                   <div className="flex items-start gap-4 mb-4">
                     <div className="company-logo microsoft">
                       <img src={microsoftLogo} alt="Microsoft" />
@@ -535,20 +535,20 @@ The app architecture follows iOS best practices with clean, modular code organiz
                       <p className="text-blue-300 font-semibold mb-4">Microsoft</p>
                     </div>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-3 max-h-12 overflow-hidden group-hover:max-h-full transition-all duration-500 ease-in-out">
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Accelerated LLM inference latency by 94.6% (from 57.1s to 3.1s) by integrating a custom TensorRT plugin</p>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                       <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Improved model accuracy by 98%, reducing output discrepancies between original and plugin-enabled models</p>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
                       <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Designed and deployed a CI/CD pipeline in Azure DevOps, reducing manual engineering overhead by 50+ hours per quarter</p>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-300">
                       <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Engineered a novel multi-LoRA deployment strategy for quantized models using zero-padding technique</p>
                     </div>
@@ -557,8 +557,8 @@ The app architecture follows iOS best practices with clean, modular code organiz
               </div>
 
               {/* Experience Item 2 */}
-              <div className="timeline-item fade-in">
-                <div className="timeline-card">
+              <div className="timeline-item fade-in group">
+                <div className="timeline-card hover:scale-105 transition-all duration-300">
                   <div className="flex items-start gap-4 mb-4">
                     <div className="company-logo summernest">
                       <Home size={32} className="text-white" />
@@ -571,20 +571,20 @@ The app architecture follows iOS best practices with clean, modular code organiz
                       <p className="text-purple-300 font-semibold mb-4">SummerNest</p>
                     </div>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-3 max-h-12 overflow-hidden group-hover:max-h-full transition-all duration-500 ease-in-out">
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Developed a React.js-based website for facilitating medium-term housing arrangements near college campuses</p>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                       <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Architected a Node.js and Express.js backend integrated with PostgreSQL</p>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
                       <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Interviewed 20+ property owners and students to identify key pain points, leading to feature enhancements</p>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-300">
                       <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Accepted into Johns Hopkins' "Spark" start-up accelerator, receiving $500 in grants</p>
                     </div>
@@ -593,8 +593,8 @@ The app architecture follows iOS best practices with clean, modular code organiz
               </div>
 
               {/* Experience Item 3 */}
-              <div className="timeline-item fade-in">
-                <div className="timeline-card">
+              <div className="timeline-item fade-in group">
+                <div className="timeline-card hover:scale-105 transition-all duration-300">
                   <div className="flex items-start gap-4 mb-4">
                     <div className="company-logo uwmedicine">
                       <img src={uwLogo} alt="UW Medicine" />
@@ -607,16 +607,16 @@ The app architecture follows iOS best practices with clean, modular code organiz
                       <p className="text-cyan-300 font-semibold mb-4">Value Systems and Sciences Lab, UW Medicine</p>
                     </div>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-3 max-h-12 overflow-hidden group-hover:max-h-full transition-all duration-500 ease-in-out">
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Leveraged R to analyze extensive data samples from a national physician survey</p>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                       <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Identified the effects of financial incentives on access to care for over 400,000 clinicians</p>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
                       <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-gray-300">Findings presented at a national research meeting and published in a peer-reviewed journal</p>
                     </div>
