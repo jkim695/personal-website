@@ -507,7 +507,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
         </div>
       </section>
 
-      {/* Experience Section */}
+      {/* Experience Section - Vertical Timeline */}
       <section id="experience" className="section bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-black/50"></div>
@@ -518,107 +518,173 @@ The app architecture follows iOS best practices with clean, modular code organiz
             Experience
           </h2>
           
-          <div className="max-w-6xl mx-auto">
-            <div className="timeline">
-              {/* Experience Item 1 */}
-              <div className="timeline-item fade-in group">
-                <div className="timeline-card hover:scale-105 transition-all duration-300">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="company-logo microsoft">
-                      <img src={microsoftLogo} alt="Microsoft" />
+          {/* Timeline Container */}
+          <div className="max-w-4xl mx-auto relative">
+            {/* Vertical Line */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-500 md:left-1/2 md:transform md:-translate-x-px"></div>
+            
+            {/* Timeline Items */}
+            <div className="space-y-12">
+              {/* Microsoft */}
+              <div className="timeline-entry group fade-in">
+                {/* Timeline Dot */}
+                <div className="absolute left-6 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg md:left-1/2 md:transform md:-translate-x-1/2 z-10"></div>
+                
+                {/* Content Container */}
+                <div className="ml-20 md:ml-0 md:w-5/12 md:pr-8">
+                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl cursor-pointer">
+                    {/* Icon and Title - Always Visible */}
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <img src={microsoftLogo} alt="Microsoft" className="w-8 h-8 object-contain"/>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-white">Software Engineer Intern</h3>
+                        <p className="text-blue-300 font-medium">Microsoft | Feb 2024 - Present</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <div className="date-badge">February 2024 - Present</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">
-                        Software Engineer Intern
-                      </h3>
-                      <p className="text-blue-300 font-semibold mb-4">Microsoft</p>
-                    </div>
-                  </div>
-                  <div className="space-y-3 max-h-12 overflow-hidden group-hover:max-h-full transition-all duration-500 ease-in-out">
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Accelerated LLM inference latency by 94.6% (from 57.1s to 3.1s) by integrating a custom TensorRT plugin</p>
-                    </div>
-                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Improved model accuracy by 98%, reducing output discrepancies between original and plugin-enabled models</p>
-                    </div>
-                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Designed and deployed a CI/CD pipeline in Azure DevOps, reducing manual engineering overhead by 50+ hours per quarter</p>
-                    </div>
-                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-300">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Engineered a novel multi-LoRA deployment strategy for quantized models using zero-padding technique</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Experience Item 2 */}
-              <div className="timeline-item fade-in group">
-                <div className="timeline-card hover:scale-105 transition-all duration-300">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="company-logo summernest">
-                      <Home size={32} className="text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="date-badge">July 2024 - December 2024</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">
-                        Co-Founder, Full Stack Developer
-                      </h3>
-                      <p className="text-purple-300 font-semibold mb-4">SummerNest</p>
-                    </div>
-                  </div>
-                  <div className="space-y-3 max-h-12 overflow-hidden group-hover:max-h-full transition-all duration-500 ease-in-out">
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Developed a React.js-based website for facilitating medium-term housing arrangements near college campuses</p>
-                    </div>
-                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Architected a Node.js and Express.js backend integrated with PostgreSQL</p>
-                    </div>
-                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Interviewed 20+ property owners and students to identify key pain points, leading to feature enhancements</p>
-                    </div>
-                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-300">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Accepted into Johns Hopkins' "Spark" start-up accelerator, receiving $500 in grants</p>
+                    
+                    {/* Short Description - Always Visible */}
+                    <p className="text-gray-300 mb-4">
+                      Accelerated LLM inference and built enterprise deployment solutions
+                    </p>
+                    
+                    {/* Expandable Content */}
+                    <div className="timeline-expandable-content overflow-hidden transition-all duration-500 ease-out">
+                      <div className="pt-4 border-t border-white/20">
+                        <h4 className="font-semibold text-white mb-3">Key Achievements:</h4>
+                        <ul className="space-y-2 text-gray-300 mb-4">
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            94.6% improvement in LLM inference latency (57.1s to 3.1s)
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Engineered CI/CD pipeline reducing overhead by 50+ hours/quarter
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Designed multi-LoRA deployment strategy for quantized models
+                          </li>
+                        </ul>
+                        <div className="flex flex-wrap gap-2">
+                          {['TensorRT', 'Azure DevOps', 'C++', 'Python', 'CUDA'].map((tech) => (
+                            <span key={tech} className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Experience Item 3 */}
-              <div className="timeline-item fade-in group">
-                <div className="timeline-card hover:scale-105 transition-all duration-300">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="company-logo uwmedicine">
-                      <img src={uwLogo} alt="UW Medicine" />
+              {/* SummerNest */}
+              <div className="timeline-entry group fade-in">
+                {/* Timeline Dot */}
+                <div className="absolute left-6 w-4 h-4 bg-purple-500 rounded-full border-4 border-white shadow-lg md:left-1/2 md:transform md:-translate-x-1/2 z-10"></div>
+                
+                {/* Content Container - Right side on desktop */}
+                <div className="ml-20 md:ml-auto md:w-5/12 md:pl-8">
+                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl cursor-pointer">
+                    {/* Icon and Title - Always Visible */}
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <Home size={24} className="text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-white">Co-Founder & Full Stack Developer</h3>
+                        <p className="text-purple-300 font-medium">SummerNest | Jul 2024 - Dec 2024</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <div className="date-badge">July 2022 - September 2023</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">
-                        Health Equity Data Scientist Intern
-                      </h3>
-                      <p className="text-cyan-300 font-semibold mb-4">Value Systems and Sciences Lab, UW Medicine</p>
+                    
+                    {/* Short Description - Always Visible */}
+                    <p className="text-gray-300 mb-4">
+                      Student housing platform accepted into Johns Hopkins accelerator
+                    </p>
+                    
+                    {/* Expandable Content */}
+                    <div className="timeline-expandable-content overflow-hidden transition-all duration-500 ease-out">
+                      <div className="pt-4 border-t border-white/20">
+                        <h4 className="font-semibold text-white mb-3">Achievements:</h4>
+                        <ul className="space-y-2 text-gray-300 mb-4">
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Built React.js platform with PostgreSQL backend
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Interviewed 20+ stakeholders for market validation
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Received $500 grant from "Spark" accelerator program
+                          </li>
+                        </ul>
+                        <div className="flex flex-wrap gap-2">
+                          {['React.js', 'Node.js', 'PostgreSQL', 'Express.js', 'JWT'].map((tech) => (
+                            <span key={tech} className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="space-y-3 max-h-12 overflow-hidden group-hover:max-h-full transition-all duration-500 ease-in-out">
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Leveraged R to analyze extensive data samples from a national physician survey</p>
+                </div>
+              </div>
+
+              {/* UW Medicine */}
+              <div className="timeline-entry group fade-in">
+                {/* Timeline Dot */}
+                <div className="absolute left-6 w-4 h-4 bg-cyan-500 rounded-full border-4 border-white shadow-lg md:left-1/2 md:transform md:-translate-x-1/2 z-10"></div>
+                
+                {/* Content Container */}
+                <div className="ml-20 md:ml-0 md:w-5/12 md:pr-8">
+                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl cursor-pointer">
+                    {/* Icon and Title - Always Visible */}
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-cyan-500 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <img src={uwLogo} alt="UW Medicine" className="w-8 h-8 object-cover rounded"/>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-white">Health Equity Data Scientist</h3>
+                        <p className="text-cyan-300 font-medium">UW Medicine | Jul 2022 - Sep 2023</p>
+                      </div>
                     </div>
-                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                      <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Identified the effects of financial incentives on access to care for over 400,000 clinicians</p>
-                    </div>
-                    <div className="flex items-start gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
-                      <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300">Findings presented at a national research meeting and published in a peer-reviewed journal</p>
+                    
+                    {/* Short Description - Always Visible */}
+                    <p className="text-gray-300 mb-4">
+                      Analyzed physician survey data impacting 400,000+ clinicians
+                    </p>
+                    
+                    {/* Expandable Content */}
+                    <div className="timeline-expandable-content overflow-hidden transition-all duration-500 ease-out">
+                      <div className="pt-4 border-t border-white/20">
+                        <h4 className="font-semibold text-white mb-3">Research Impact:</h4>
+                        <ul className="space-y-2 text-gray-300 mb-4">
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-cyan-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Analyzed national physician survey using R statistical computing
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-cyan-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Published findings in peer-reviewed journal
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-cyan-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Presented research at national medical conference
+                          </li>
+                        </ul>
+                        <div className="flex flex-wrap gap-2">
+                          {['R', 'Statistical Analysis', 'Data Visualization', 'Healthcare Research'].map((tech) => (
+                            <span key={tech} className="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm font-medium">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
