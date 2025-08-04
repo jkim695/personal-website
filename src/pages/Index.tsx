@@ -4,6 +4,7 @@ import heroImage from '@/assets/hero-image.png';
 import microsoftLogo from '@/assets/Microsoft.png';
 import uwLogo from '@/assets/UW.jpg';
 import hopkinsLogo from '@/assets/hopkins_logo.png';
+import hopkinsBird from '@/assets/hopkinsbird.png';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('about');
@@ -519,56 +520,56 @@ The app architecture follows iOS best practices with clean, modular code organiz
           </h2>
           
           {/* Timeline Container */}
-          <div className="max-w-4xl mx-auto relative">
-            {/* Vertical Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-500 md:left-1/2 md:transform md:-translate-x-px"></div>
+          <div className="max-w-5xl mx-auto relative">
+            {/* Vertical Timeline Line - positioned left of center */}
+            <div className="absolute left-8 md:left-[30%] top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-500"></div>
             
             {/* Timeline Items */}
             <div className="space-y-12">
-              {/* Microsoft */}
-              <div className="timeline-entry group fade-in">
+              {/* Microsoft AI Researcher */}
+              <div className="timeline-entry group fade-in relative">
                 {/* Timeline Dot */}
-                <div className="absolute left-6 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg md:left-1/2 md:transform md:-translate-x-1/2 z-10"></div>
+                <div className="absolute left-6 md:left-[30%] md:-translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg z-10"></div>
                 
-                {/* Content Container */}
-                <div className="ml-20 md:ml-0 md:w-5/12 md:pr-8">
-                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl cursor-pointer">
+                {/* Content Container - All boxes on the right */}
+                <div className="ml-20 md:ml-[35%] md:w-[60%]">
+                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
                     {/* Icon and Title - Always Visible */}
                     <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                        <img src={microsoftLogo} alt="Microsoft" className="w-8 h-8 object-contain"/>
+                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-4 flex-shrink-0 shadow-lg overflow-hidden">
+                        <img src={microsoftLogo} alt="Microsoft" className="w-full h-full object-cover"/>
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-white">Software Engineer Intern</h3>
-                        <p className="text-blue-300 font-medium">Microsoft | Feb 2024 - Present</p>
+                        <h3 className="text-lg font-bold text-white">AI Researcher, Intern</h3>
+                        <p className="text-blue-300 font-medium">Microsoft | Feb 2024 - Present | Redmond, WA</p>
                       </div>
                     </div>
                     
                     {/* Short Description - Always Visible */}
                     <p className="text-gray-300 mb-4">
-                      Accelerated LLM inference and built enterprise deployment solutions
+                      Accelerating LLM inference and optimizing AI model deployment
                     </p>
                     
-                    {/* Expandable Content */}
-                    <div className="timeline-expandable-content overflow-hidden transition-all duration-500 ease-out">
+                    {/* Content */}
+                    <div>
                       <div className="pt-4 border-t border-white/20">
                         <h4 className="font-semibold text-white mb-3">Key Achievements:</h4>
                         <ul className="space-y-2 text-gray-300 mb-4">
                           <li className="flex items-start">
                             <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            94.6% improvement in LLM inference latency (57.1s to 3.1s)
+                            Accelerated LLM inference latency by 94.6% (from 57.1s to 3.1s) by integrating a custom TensorRT plugin, removing a critical performance bottleneck for multiple GPU-powered applications in Azure AI Services
                           </li>
                           <li className="flex items-start">
                             <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Engineered CI/CD pipeline reducing overhead by 50+ hours/quarter
+                            Improved model accuracy by adjusting computation parameters in log bucket calculations, reducing output discrepancies between the original model and the plugin-enabled model by 98%
                           </li>
                           <li className="flex items-start">
                             <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Designed multi-LoRA deployment strategy for quantized models
+                            Engineered a novel multi-LoRA deployment strategy for quantized models, overcoming hardware operator limitations by implementing a zero-padding technique to simulate dynamic adapter ranking
                           </li>
                         </ul>
                         <div className="flex flex-wrap gap-2">
-                          {['TensorRT', 'Azure DevOps', 'C++', 'Python', 'CUDA'].map((tech) => (
+                          {['TensorRT', 'PyTorch', 'CUDA', 'Azure AI', 'C++', 'Python'].map((tech) => (
                             <span key={tech} className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium">
                               {tech}
                             </span>
@@ -580,18 +581,73 @@ The app architecture follows iOS best practices with clean, modular code organiz
                 </div>
               </div>
 
-              {/* SummerNest */}
-              <div className="timeline-entry group fade-in">
+              {/* Microsoft Software Engineer */}
+              <div className="timeline-entry group fade-in relative">
                 {/* Timeline Dot */}
-                <div className="absolute left-6 w-4 h-4 bg-purple-500 rounded-full border-4 border-white shadow-lg md:left-1/2 md:transform md:-translate-x-1/2 z-10"></div>
+                <div className="absolute left-6 md:left-[30%] md:-translate-x-1/2 w-4 h-4 bg-indigo-500 rounded-full border-4 border-white shadow-lg z-10"></div>
                 
-                {/* Content Container - Right side on desktop */}
-                <div className="ml-20 md:ml-auto md:w-5/12 md:pl-8">
-                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl cursor-pointer">
+                {/* Content Container - All boxes on the right */}
+                <div className="ml-20 md:ml-[35%] md:w-[60%]">
+                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
                     {/* Icon and Title - Always Visible */}
                     <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                        <Home size={24} className="text-white" />
+                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-4 flex-shrink-0 shadow-lg overflow-hidden">
+                        <img src={microsoftLogo} alt="Microsoft" className="w-full h-full object-cover"/>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-white">Software Engineer, Intern</h3>
+                        <p className="text-indigo-300 font-medium">Microsoft | Feb 2024 - Nov 2024 | Redmond, WA</p>
+                      </div>
+                    </div>
+                    
+                    {/* Short Description - Always Visible */}
+                    <p className="text-gray-300 mb-4">
+                      Built automation tools and CI/CD pipelines for production systems
+                    </p>
+                    
+                    {/* Content */}
+                    <div>
+                      <div className="pt-4 border-t border-white/20">
+                        <h4 className="font-semibold text-white mb-3">Key Achievements:</h4>
+                        <ul className="space-y-2 text-gray-300 mb-4">
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Developed a comprehensive Python script to programmatically scan project repositories, identify outdated dependencies using package manager APIs, and automate the version update process
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Architected and deployed a multi-stage CI/CD pipeline in Azure DevOps that integrated the automation script, triggering validation checks on every commit to ensure system stability
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Reduced quarterly engineering overhead by over 50 hours and significantly mitigated security risks by ensuring continuous compliance and eliminating vulnerable components
+                          </li>
+                        </ul>
+                        <div className="flex flex-wrap gap-2">
+                          {['Python', 'Azure DevOps', 'CI/CD', 'Git', 'API Integration'].map((tech) => (
+                            <span key={tech} className="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-sm font-medium">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* SummerNest */}
+              <div className="timeline-entry group fade-in relative">
+                {/* Timeline Dot */}
+                <div className="absolute left-6 md:left-[30%] md:-translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full border-4 border-white shadow-lg z-10"></div>
+                
+                {/* Content Container - All boxes on the right */}
+                <div className="ml-20 md:ml-[35%] md:w-[60%]">
+                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
+                    {/* Icon and Title - Always Visible */}
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-4 flex-shrink-0 shadow-lg overflow-hidden relative">
+                        <img src={hopkinsBird} alt="Hopkins Blue Jay" className="w-[4.5rem] h-[4.5rem] object-cover transform translate-y-0.5"/>
                       </div>
                       <div>
                         <h3 className="text-lg font-bold text-white">Co-Founder & Full Stack Developer</h3>
@@ -604,8 +660,8 @@ The app architecture follows iOS best practices with clean, modular code organiz
                       Student housing platform accepted into Johns Hopkins accelerator
                     </p>
                     
-                    {/* Expandable Content */}
-                    <div className="timeline-expandable-content overflow-hidden transition-all duration-500 ease-out">
+                    {/* Content */}
+                    <div>
                       <div className="pt-4 border-t border-white/20">
                         <h4 className="font-semibold text-white mb-3">Achievements:</h4>
                         <ul className="space-y-2 text-gray-300 mb-4">
@@ -636,17 +692,17 @@ The app architecture follows iOS best practices with clean, modular code organiz
               </div>
 
               {/* UW Medicine */}
-              <div className="timeline-entry group fade-in">
+              <div className="timeline-entry group fade-in relative">
                 {/* Timeline Dot */}
-                <div className="absolute left-6 w-4 h-4 bg-cyan-500 rounded-full border-4 border-white shadow-lg md:left-1/2 md:transform md:-translate-x-1/2 z-10"></div>
+                <div className="absolute left-6 md:left-[30%] md:-translate-x-1/2 w-4 h-4 bg-cyan-500 rounded-full border-4 border-white shadow-lg z-10"></div>
                 
-                {/* Content Container */}
-                <div className="ml-20 md:ml-0 md:w-5/12 md:pr-8">
-                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl cursor-pointer">
+                {/* Content Container - All boxes on the right */}
+                <div className="ml-20 md:ml-[35%] md:w-[60%]">
+                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
                     {/* Icon and Title - Always Visible */}
                     <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-cyan-500 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                        <img src={uwLogo} alt="UW Medicine" className="w-8 h-8 object-cover rounded"/>
+                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-4 flex-shrink-0 shadow-lg overflow-hidden">
+                        <img src={uwLogo} alt="UW Medicine" className="w-full h-full object-cover"/>
                       </div>
                       <div>
                         <h3 className="text-lg font-bold text-white">Health Equity Data Scientist</h3>
@@ -659,8 +715,8 @@ The app architecture follows iOS best practices with clean, modular code organiz
                       Analyzed physician survey data impacting 400,000+ clinicians
                     </p>
                     
-                    {/* Expandable Content */}
-                    <div className="timeline-expandable-content overflow-hidden transition-all duration-500 ease-out">
+                    {/* Content */}
+                    <div>
                       <div className="pt-4 border-t border-white/20">
                         <h4 className="font-semibold text-white mb-3">Research Impact:</h4>
                         <ul className="space-y-2 text-gray-300 mb-4">
@@ -724,7 +780,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
                   <div className="flex-1">
                     <div className="mb-6">
                       <div className="inline-block bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
-                        Expected May 2027
+                        Expected May 2026
                       </div>
                       <h3 className="text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
                         Bachelor of Science, Computer Science
@@ -939,7 +995,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
                   Machine Learning & AI
                 </h3>
                 <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                  Production-scale AI optimization at <strong className="text-white">Microsoft</strong>, accelerating LLM inference by <strong className="text-cyan-400">94.6%</strong> through custom <strong className="text-white">TensorRT plugins</strong> and improving model accuracy by <strong className="text-cyan-400">98%</strong>. Engineered novel <strong className="text-white">multi-LoRA deployment strategies</strong> and <strong className="text-white">CI/CD pipelines</strong> that saved <strong className="text-cyan-400">50+ hours quarterly</strong>. Expert in <strong className="text-white">Python</strong>, <strong className="text-white">PyTorch</strong>, <strong className="text-white">Azure AI Services</strong>, and production ML deployment.
+                  Production-scale AI optimization at <strong className="text-white">Microsoft</strong>, accelerating LLM inference by <strong className="text-cyan-400">94.6%</strong> through custom <strong className="text-white">TensorRT plugins</strong> and improving model accuracy by <strong className="text-cyan-400">98%</strong>. Pioneered innovative <strong className="text-white">multi-LoRA deployment strategies</strong> for quantized models, implementing <strong className="text-white">zero-padding techniques</strong> to overcome hardware operator limitations and enable <strong className="text-white">dynamic adapter ranking</strong>. This breakthrough eliminated critical model loading bottlenecks and significantly improved service performance. Expert in <strong className="text-white">Python</strong>, <strong className="text-white">PyTorch</strong>, <strong className="text-white">Azure AI Services</strong>, and production ML deployment.
                 </p>
               </div>
             </div>
