@@ -428,7 +428,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
               </button>
               
               <a 
-                href="/JOSHUA_KIM_SWE_INTERNSHIP_RESUME.pdf" 
+                href="https://jkim695.github.io/resume.pdf" 
                 download="Joshua_Kim_Resume.pdf"
                 className="bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2 border border-white/30 backdrop-blur-sm"
               >
