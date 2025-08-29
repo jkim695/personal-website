@@ -136,7 +136,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
 
     const handleScroll = () => {
       
-      const sections = ['about', 'experience', 'education', 'projects', 'competencies', 'contact'];
+      const sections = ['about', 'experience', 'education', 'projects', 'competencies', 'interests', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -182,7 +182,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
   }, []);
 
   const navigationItems = useMemo(() => [
-    'About', 'Experience', 'Education', 'Projects', 'Competencies', 'Contact'
+    'About', 'Experience', 'Education', 'Projects', 'Competencies', 'Interests', 'Contact'
   ], []);
 
   return (
@@ -784,6 +784,75 @@ The app architecture follows iOS best practices with clean, modular code organiz
                 </h3>
                 <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
                   Strong foundational knowledge of Java, C++, and Python, with expertise in Data Structures, Algorithms, and Object-Oriented Programming. Proven ability to write efficient, maintainable code across multiple paradigms and platforms.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interests Section */}
+      <section id="interests" className="section bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-black/40"></div>
+        
+        <div className="container-custom relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center fade-in bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            Interests & Hobbies
+          </h2>
+          
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Tennis */}
+            <div className="fade-in interest-card">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 h-full">
+                <div className="text-6xl mb-4 text-center">🎾</div>
+                <h3 className="text-2xl font-bold text-white mb-4 text-center">Tennis</h3>
+                <p className="text-gray-300 leading-relaxed text-center">
+                  Passionate about tennis, enjoying both recreational play and following professional tournaments. The sport teaches discipline, strategy, and mental resilience.
+                </p>
+              </div>
+            </div>
+
+            {/* Golf */}
+            <div className="fade-in interest-card">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 h-full">
+                <div className="text-6xl mb-4 text-center">⛳</div>
+                <h3 className="text-2xl font-bold text-white mb-4 text-center">Golf</h3>
+                <p className="text-gray-300 leading-relaxed text-center">
+                  Find golf to be the perfect blend of precision, patience, and strategic thinking. Each round presents unique challenges and opportunities for improvement.
+                </p>
+              </div>
+            </div>
+
+            {/* Trading */}
+            <div className="fade-in interest-card">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 h-full">
+                <div className="text-6xl mb-4 text-center">📈</div>
+                <h3 className="text-2xl font-bold text-white mb-4 text-center">Discretionary Trading</h3>
+                <p className="text-gray-300 leading-relaxed text-center">
+                  Engage in discretionary trading, combining technical analysis with market intuition. Fascinated by market psychology and risk management strategies.
+                </p>
+              </div>
+            </div>
+
+            {/* Investing */}
+            <div className="fade-in interest-card">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 h-full">
+                <div className="text-6xl mb-4 text-center">💰</div>
+                <h3 className="text-2xl font-bold text-white mb-4 text-center">Investing</h3>
+                <p className="text-gray-300 leading-relaxed text-center">
+                  Long-term investor with interest in fundamental analysis, portfolio diversification, and understanding economic trends that drive market movements.
+                </p>
+              </div>
+            </div>
+
+            {/* Mountaineering */}
+            <div className="fade-in interest-card md:col-span-2 lg:col-span-1">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 h-full">
+                <div className="text-6xl mb-4 text-center">🏔️</div>
+                <h3 className="text-2xl font-bold text-white mb-4 text-center">Mountaineering</h3>
+                <p className="text-gray-300 leading-relaxed text-center">
+                  Love the challenge and adventure of mountaineering. The sport demands physical endurance, mental toughness, and careful planning - skills that translate to many areas of life.
                 </p>
               </div>
             </div>
