@@ -4,7 +4,7 @@ A modern, responsive portfolio website showcasing my experience as a Software En
 
 ## 🌐 Live Site
 
-**Deployed on GitHub Pages**: https://jkim695.github.io/modern-student-site/
+**Deployed on GitHub Pages**: https://jkim695.github.io/personal-website/
 
 ## 📋 Project Overview
 
@@ -49,7 +49,7 @@ src/
 
 ```bash
 # Clone the repository
-git clone https://github.com/jkim695/modern-student-site.git
+git clone https://github.com/jkim695/personal-website.git
 
 # Navigate to project directory
 cd modern-student-site

@@ -5,15 +5,14 @@ import microsoftLogo from '@/assets/Microsoft.png';
 import uwLogo from '@/assets/UW.jpg';
 import hopkinsLogo from '@/assets/hopkins_logo.png';
 import hopkinsBird from '@/assets/hopkinsbird.png';
+import attentionNMT from '@/assets/attention_NMT.jpg';
+import summernestLogo from '@/assets/summernest.png';
+import goalshareLogo from '@/assets/goalshare.png';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('about');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const scrollStoryRef = useRef<HTMLDivElement>(null);
-  const requestRef = useRef<number>();
-  const lastScrollTime = useRef<number>(0);
   const [isLowPerfDevice, setIsLowPerfDevice] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   
@@ -135,119 +134,9 @@ The app architecture follows iOS best practices with clean, modular code organiz
 
     const cleanupDeviceDetection = detectDeviceCapabilities();
 
-    const handleScrollStory = () => {
-      const now = performance.now();
-      // Adjust throttling based on device capabilities
-      const throttleTime = isLowPerfDevice ? 33 : 16; // 30fps vs 60fps
-      if (now - lastScrollTime.current < throttleTime) return;
-      lastScrollTime.current = now;
-
-      if (!videoRef.current || !scrollStoryRef.current) return;
-      
-      // Skip complex animations if user prefers reduced motion
-      if (prefersReducedMotion) return;
-      
-      const video = videoRef.current;
-      const container = scrollStoryRef.current;
-      const windowHeight = window.innerHeight;
-      
-      // Calculate scroll progress through the scroll story section
-      const scrollTop = window.scrollY;
-      const containerTop = container.offsetTop;
-      const containerHeight = container.offsetHeight;
-      
-      // Progress: 0 when container top hits bottom of viewport, 1 when container bottom hits top of viewport
-      const progress = Math.max(0, Math.min(1, 
-        (scrollTop - containerTop + windowHeight) / (containerHeight + windowHeight)
-      ));
-      
-      // Use requestAnimationFrame for smoother video updates
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current);
-      }
-      
-      requestRef.current = requestAnimationFrame(() => {
-        // Frame-precise video control with improved performance
-        if (video.duration && video.readyState >= 2) {
-          const targetTime = progress * video.duration;
-          // Reduce threshold for more responsive video seeking
-          if (Math.abs(video.currentTime - targetTime) > 0.05) {
-            try {
-              video.currentTime = targetTime;
-            } catch (error) {
-              console.warn('Failed to seek video:', error);
-            }
-          }
-        }
-        
-        // Update star field animation speed based on scroll progress
-        const starField = container.querySelector('.star-field');
-        if (starField) {
-          try {
-            const speed = 1 + (progress * 2); // Reduce max speed for smoother animation
-            (starField as HTMLElement).style.setProperty('--animation-speed', `${speed}s`);
-          } catch (error) {
-            console.warn('Failed to update star field animation:', error);
-          }
-        }
-        
-        // Update text animations with gaps between sections
-        const textElements = container.querySelectorAll('.scroll-text');
-        textElements.forEach((element, index) => {
-          // Delay text animations until video is fully in frame (after 15% of scroll progress)
-          const baseDelay = 0.15; // Wait until video is fully visible
-          const sectionStart = baseDelay + (index * 0.2); // Start of this section (20% intervals after delay for 3 sections)
-          const sectionEnd = sectionStart + 0.15; // Each section lasts 15% (leaving 5% gap)
-          
-          // For the last text element, end earlier to fade out before next section
-          const isLastText = index === textElements.length - 1;
-          const adjustedSectionEnd = isLastText ? Math.min(sectionEnd, 0.7) : sectionEnd; // End last text by 70% progress
-          
-          let opacity = 0;
-          let translateY = 50; // Start further down for more pronounced upward movement
-          
-          if (progress >= sectionStart && progress <= adjustedSectionEnd) {
-            // Fade in/out within the section duration
-            const sectionDuration = adjustedSectionEnd - sectionStart;
-            const sectionProgress = (progress - sectionStart) / sectionDuration;
-            
-            if (sectionProgress <= 0.3) {
-              // Fade in (first 30% of section)
-              opacity = sectionProgress / 0.3;
-              translateY = 50 * (1 - opacity);
-            } else if (sectionProgress >= 0.7) {
-              // Fade out (last 30% of section)
-              opacity = (1 - sectionProgress) / 0.3;
-              // Continue moving up as text fades out
-              translateY = -20 * (1 - opacity);
-            } else {
-              // Fully visible (middle 40% of section)
-              opacity = 1;
-              translateY = 0;
-            }
-          } else if (progress > adjustedSectionEnd) {
-            // Text has passed - continue moving up
-            opacity = 0;
-            translateY = -50;
-          }
-          
-          // Add continuous upward movement based on overall progress
-          const continuousTranslate = -progress * 30; // Moves up 30px per progress unit
-          
-          // Use transform3d for better GPU acceleration
-          try {
-            (element as HTMLElement).style.opacity = opacity.toString();
-            (element as HTMLElement).style.transform = `translate3d(-50%, calc(-50% + ${translateY + continuousTranslate}px), 0)`;
-          } catch (error) {
-            console.warn('Failed to update text animation:', error);
-          }
-        });
-      });
-    };
-
     const handleScroll = () => {
       
-      const sections = ['about', 'scroll-story', 'experience', 'education', 'projects', 'competencies', 'contact'];
+      const sections = ['about', 'experience', 'education', 'projects', 'competencies', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -258,39 +147,10 @@ The app architecture follows iOS best practices with clean, modular code organiz
       });
       if (current) setActiveSection(current);
       
-      handleScrollStory();
-    };
-
-    // Initialize video when it loads with error handling
-    const initializeVideo = () => {
-      if (videoRef.current) {
-        const video = videoRef.current;
-        
-        const handleLoadedData = () => {
-          try {
-            video.currentTime = 0;
-          } catch (error) {
-            console.warn('Failed to set video current time:', error);
-          }
-        };
-        
-        const handleError = (error: ErrorEvent) => {
-          console.warn('Video failed to load:', error);
-        };
-        
-        video.addEventListener('loadeddata', handleLoadedData);
-        video.addEventListener('error', handleError);
-        
-        return () => {
-          video.removeEventListener('loadeddata', handleLoadedData);
-          video.removeEventListener('error', handleError);
-        };
-      }
     };
 
 
     const cleanup = observeElements();
-    initializeVideo();
     window.addEventListener('scroll', handleScroll);
     
     // Handle keyboard events for modal
@@ -307,9 +167,6 @@ The app architecture follows iOS best practices with clean, modular code organiz
       cleanupDeviceDetection();
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('keydown', handleKeyDown);
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current);
-      }
     };
   }, [isLowPerfDevice, prefersReducedMotion]);
 
@@ -441,77 +298,11 @@ The app architecture follows iOS best practices with clean, modular code organiz
         
       </section>
 
-      {/* Scroll Story Section */}
-      <section id="scroll-story" className="relative" ref={scrollStoryRef}>
-        <div className="h-[350vh] relative">{/* Reduced height for faster transition to education section */}
-          {/* Space Flight Container */}
-          <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black">
-            {/* CSS Star Field Background */}
-            <div className="star-field">
-              <div className="space-travel"></div>
-            </div>
-            
-            {/* Fallback Video (optimized for performance) */}
-            {!isLowPerfDevice && (
-              <video
-                ref={videoRef}
-                className="w-full h-full object-cover opacity-50"
-                muted
-                playsInline
-                preload={isLowPerfDevice ? "none" : "auto"}
-                style={{
-                  transform: 'translateZ(0)', // Force GPU acceleration
-                  willChange: 'transform',
-                  mixBlendMode: 'screen',
-                  filter: 'brightness(0.8) contrast(1.1)'
-                }}
-                poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Cdefs%3E%3CradialGradient id='space' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23000033'/%3E%3Cstop offset='100%25' stop-color='%23000000'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23space)'/%3E%3C/svg%3E"
-              >
-                <source src="https://videos.pexels.com/video-files/4842727/4842727-hd_1920_1080_30fps.mp4" type="video/mp4" />
-                <source src="https://videos.pexels.com/video-files/4842727/4842727-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-              </video>
-            )}
-            
-            {/* Overlay Text */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center text-white max-w-4xl px-8">
-                <div className="scroll-text opacity-0">
-                  <h2 className="text-4xl md:text-6xl font-bold mb-6">
-                    Performance
-                  </h2>
-                  <p className="text-xl md:text-2xl">
-                    At Microsoft, I improved LLM inference latency by <span className="text-cyan-400">94.6%</span> through deep model and pipeline optimization.
-                  </p>
-                </div>
-                
-                <div className="scroll-text opacity-0">
-                  <h2 className="text-4xl md:text-6xl font-bold mb-6">
-                    Innovation
-                  </h2>
-                  <p className="text-xl md:text-2xl">
-                    I co-founded and architected SummerNest, a full-stack housing platform that secured <span className="text-cyan-400">$500</span> in "Spark" start-up funding from Johns Hopkins.
-                  </p>
-                </div>
-                
-                <div className="scroll-text opacity-0">
-                  <h2 className="text-4xl md:text-6xl font-bold mb-6">
-                    Impact
-                  </h2>
-                  <p className="text-xl md:text-2xl">
-                    My data analysis work contributed to a peer-reviewed journal and research presented at a national meeting, impacting over <span className="text-cyan-400">400,000</span> clinicians.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Experience Section - Vertical Timeline */}
       <section id="experience" className="section bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="star-field opacity-30"></div>
         
         <div className="container-custom relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center fade-in bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -539,7 +330,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
                         <img src={microsoftLogo} alt="Microsoft" className="w-full h-full object-cover"/>
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-white">AI Researcher, Intern</h3>
+                        <h3 className="text-lg font-bold text-white">AI/ML Engineer Intern - Azure AI Services</h3>
                         <p className="text-blue-300 font-medium">Microsoft | Feb 2024 - Present | Redmond, WA</p>
                       </div>
                     </div>
@@ -594,7 +385,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
                         <img src={microsoftLogo} alt="Microsoft" className="w-full h-full object-cover"/>
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-white">Software Engineer, Intern</h3>
+                        <h3 className="text-lg font-bold text-white">Software Engineer Intern - Azure AI Services</h3>
                         <p className="text-indigo-300 font-medium">Microsoft | Feb 2024 - Nov 2024 | Redmond, WA</p>
                       </div>
                     </div>
@@ -753,7 +544,6 @@ The app architecture follows iOS best practices with clean, modular code organiz
       <section id="education" className="section bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="star-field opacity-20"></div>
         
         <div className="container-custom relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center fade-in bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
@@ -829,7 +619,6 @@ The app architecture follows iOS best practices with clean, modular code organiz
       <section id="projects" className="section bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="star-field opacity-25"></div>
         
         <div className="container-custom relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center fade-in bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -839,14 +628,12 @@ The app architecture follows iOS best practices with clean, modular code organiz
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {/* Project 1 */}
             <div className="group project-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-blue-500/25 fade-in">
-              <div className="relative h-64 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10"></div>
-                <div className="relative z-10">
-                  <div className="project-emoji text-8xl mb-2 transition-transform duration-300">🧠</div>
-                </div>
-                <div className="absolute top-4 right-4 bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm font-medium">
-                  Machine Learning
-                </div>
+              <div className="relative h-64 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-600/10 to-purple-600/10">
+                <img 
+                  src={attentionNMT} 
+                  alt="Attention-based Neural Machine Translation Architecture" 
+                  className="w-[110%] h-[110%] object-contain"
+                />
               </div>
               <div className="p-8">
                 <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
@@ -871,26 +658,19 @@ The app architecture follows iOS best practices with clean, modular code organiz
                     <Github size={18} />
                     Code
                   </a>
-                  <button 
-                    onClick={() => setSelectedProject('neural-translator')}
-                    className="flex items-center gap-2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 px-4 py-2 rounded-lg transition-colors font-medium"
-                  >
-                    <ExternalLink size={18} />
-                    Details
-                  </button>
                 </div>
               </div>
             </div>
 
             {/* Project 2 */}
             <div className="group project-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-purple-500/25 fade-in">
-              <div className="relative h-64 bg-gradient-to-br from-purple-600/20 to-pink-600/20 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10"></div>
-                <div className="relative z-10">
-                  <div className="project-emoji text-8xl mb-2 transition-transform duration-300">🏠</div>
-                </div>
-                <div className="absolute top-4 right-4 bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm font-medium">
-                  Web Platform
+              <div className="relative h-64 bg-white flex items-center justify-center overflow-hidden">
+                <div className="relative z-10 w-full h-full flex items-center justify-center">
+                  <img 
+                    src={summernestLogo} 
+                    alt="SummerNest Logo" 
+                    className="max-w-[104%] max-h-[104%] object-contain bg-white rounded-lg"
+                  />
                 </div>
               </div>
               <div className="p-8">
@@ -916,26 +696,19 @@ The app architecture follows iOS best practices with clean, modular code organiz
                     <Github size={18} />
                     Code
                   </a>
-                  <button 
-                    onClick={() => setSelectedProject('summernest')}
-                    className="flex items-center gap-2 bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 px-4 py-2 rounded-lg transition-colors font-medium"
-                  >
-                    <ExternalLink size={18} />
-                    Details
-                  </button>
                 </div>
               </div>
             </div>
 
             {/* Project 3 */}
             <div className="group project-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/25 fade-in">
-              <div className="relative h-64 bg-gradient-to-br from-cyan-600/20 to-blue-600/20 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10"></div>
-                <div className="relative z-10">
-                  <div className="project-emoji text-8xl mb-2 transition-transform duration-300">📱</div>
-                </div>
-                <div className="absolute top-4 right-4 bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full text-sm font-medium">
-                  iOS App
+              <div className="relative h-64 flex items-center justify-center overflow-hidden" style={{backgroundColor: '#b99e29'}}>
+                <div className="relative z-10 w-full h-full flex items-center justify-center">
+                  <img 
+                    src={goalshareLogo} 
+                    alt="Goalshare Logo" 
+                    className="max-w-[100%] max-h-[100%] object-contain"
+                  />
                 </div>
               </div>
               <div className="p-8">
@@ -961,13 +734,6 @@ The app architecture follows iOS best practices with clean, modular code organiz
                     <Github size={18} />
                     Code
                   </a>
-                  <button 
-                    onClick={() => setSelectedProject('goalshare')}
-                    className="flex items-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 px-4 py-2 rounded-lg transition-colors font-medium"
-                  >
-                    <ExternalLink size={18} />
-                    Details
-                  </button>
                 </div>
               </div>
             </div>
@@ -979,7 +745,6 @@ The app architecture follows iOS best practices with clean, modular code organiz
       <section id="competencies" className="section bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="star-field opacity-20"></div>
         
         <div className="container-custom relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center fade-in bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
@@ -989,36 +754,36 @@ The app architecture follows iOS best practices with clean, modular code organiz
           <div className="max-w-4xl mx-auto space-y-12">
             <div className="fade-in competency-item">
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
-                <h3 className="text-2xl md:text-3xl font-semibold text-cyan-400 mb-4 flex items-center gap-3">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
                   <div className="w-1 h-8 bg-gradient-to-b from-cyan-400 to-blue-400 rounded-full"></div>
                   Machine Learning & AI
                 </h3>
                 <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                  Production-scale AI optimization at <strong className="text-white">Microsoft</strong>, accelerating LLM inference by <strong className="text-cyan-400">94.6%</strong> through custom <strong className="text-white">TensorRT plugins</strong> and improving model accuracy by <strong className="text-cyan-400">98%</strong>. Pioneered innovative <strong className="text-white">multi-LoRA deployment strategies</strong> for quantized models, implementing <strong className="text-white">zero-padding techniques</strong> to overcome hardware operator limitations and enable <strong className="text-white">dynamic adapter ranking</strong>. This breakthrough eliminated critical model loading bottlenecks and significantly improved service performance. Expert in <strong className="text-white">Python</strong>, <strong className="text-white">PyTorch</strong>, <strong className="text-white">Azure AI Services</strong>, and production ML deployment.
+                  Production-scale AI optimization at Microsoft, accelerating LLM inference by 94.6% through custom TensorRT plugins and improving model accuracy by 98%. Pioneered innovative multi-LoRA deployment strategies for quantized models, implementing zero-padding techniques to overcome hardware operator limitations and enable dynamic adapter ranking. This breakthrough eliminated critical model loading bottlenecks and significantly improved service performance. Expert in Python, PyTorch, Azure AI Services, and production ML deployment.
                 </p>
               </div>
             </div>
 
             <div className="fade-in competency-item">
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
-                <h3 className="text-2xl md:text-3xl font-semibold text-cyan-400 mb-4 flex items-center gap-3">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
                   <div className="w-1 h-8 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full"></div>
                   Full-Stack Development
                 </h3>
                 <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                  Proficient in creating robust applications with a modern <strong className="text-white">React.js</strong>, <strong className="text-white">Node.js</strong>, and <strong className="text-white">TypeScript</strong> stack, connected to databases like <strong className="text-white">PostgreSQL</strong> and services like <strong className="text-white">Firebase</strong>. Experience building scalable web platforms and RESTful APIs with focus on performance optimization and user experience.
+                  Proficient in creating robust applications with a modern React.js, Node.js, and TypeScript stack, connected to databases like PostgreSQL and services like Firebase. Experience building scalable web platforms and RESTful APIs with focus on performance optimization and user experience.
                 </p>
               </div>
             </div>
 
             <div className="fade-in competency-item">
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
-                <h3 className="text-2xl md:text-3xl font-semibold text-cyan-400 mb-4 flex items-center gap-3">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
                   <div className="w-1 h-8 bg-gradient-to-b from-blue-400 to-indigo-400 rounded-full"></div>
                   Programming Fundamentals
                 </h3>
                 <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                  Strong foundational knowledge of <strong className="text-white">Java</strong>, <strong className="text-white">C++</strong>, and <strong className="text-white">Python</strong>, with expertise in <strong className="text-white">Data Structures</strong>, <strong className="text-white">Algorithms</strong>, and <strong className="text-white">Object-Oriented Programming</strong>. Proven ability to write efficient, maintainable code across multiple paradigms and platforms.
+                  Strong foundational knowledge of Java, C++, and Python, with expertise in Data Structures, Algorithms, and Object-Oriented Programming. Proven ability to write efficient, maintainable code across multiple paradigms and platforms.
                 </p>
               </div>
             </div>
@@ -1030,7 +795,6 @@ The app architecture follows iOS best practices with clean, modular code organiz
       <section id="contact" className="section bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="star-field opacity-30"></div>
         
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
