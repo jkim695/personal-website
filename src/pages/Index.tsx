@@ -136,7 +136,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
 
     const handleScroll = () => {
       
-      const sections = ['about', 'experience', 'education', 'projects', 'competencies', 'interests', 'contact'];
+      const sections = ['about', 'experience', 'education', 'projects', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -182,7 +182,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
   }, []);
 
   const navigationItems = useMemo(() => [
-    'About', 'Experience', 'Education', 'Projects', 'Competencies', 'Interests', 'Contact'
+    'About', 'Experience', 'Education', 'Projects', 'Contact'
   ], []);
 
   return (
@@ -269,8 +269,8 @@ The app architecture follows iOS best practices with clean, modular code organiz
             <p className="text-lg md:text-xl text-white mb-10 leading-relaxed max-w-xl drop-shadow-md fade-in">
               Computer Science student at Johns Hopkins University with experience in 
               <span className="font-semibold"> machine learning</span>, 
-              <span className="font-semibold"> full-stack development</span>, and 
-              <span className="font-semibold"> performance optimization</span>. 
+              <span className="font-semibold"> performance optimization</span>, and 
+              <span className="font-semibold"> full-stack development</span>. 
               Currently interning at Microsoft, accelerating LLM inference and building scalable AI solutions.
             </p>
 
@@ -347,19 +347,23 @@ The app architecture follows iOS best practices with clean, modular code organiz
                         <ul className="space-y-2 text-gray-300 mb-4">
                           <li className="flex items-start">
                             <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Accelerated LLM inference latency by 94.6% (from 57.1s to 3.1s) by integrating a custom TensorRT plugin, removing a critical performance bottleneck for multiple GPU-powered applications in Azure AI Services
+                            Achieved a 10.6% reduction in production LLM latency by integrating a TensorRT plugin, eliminating a critical bottleneck for GPU-accelerated applications in Azure AI Services
                           </li>
                           <li className="flex items-start">
                             <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Improved model accuracy by adjusting computation parameters in log bucket calculations, reducing output discrepancies between the original model and the plugin-enabled model by 98%
+                            Eliminated a critical model loading bottleneck for multi-LoRA deployments by implementing a dynamic adapter loading system for quantized ONNX models, enabling instantaneous adapter switching without service interruptions
                           </li>
                           <li className="flex items-start">
                             <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Engineered a novel multi-LoRA deployment strategy for quantized models, overcoming hardware operator limitations by implementing a zero-padding technique to simulate dynamic adapter ranking
+                            Resolved fundamental hardware operator limitations by creating an innovative zero-padding technique to enable dynamic adapter ranking for quantized models
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Currently leading the migration of our core LLM services from ONNX Runtime to vLLM, architecting a new system to dramatically increase throughput and enable multi-LoRA serving for scalable model personalization
                           </li>
                         </ul>
                         <div className="flex flex-wrap gap-2">
-                          {['TensorRT', 'PyTorch', 'CUDA', 'Azure AI', 'C++', 'Python'].map((tech) => (
+                          {['TensorRT', 'PyTorch', 'CUDA', 'Azure AI', 'Python', 'ONNX Runtime', 'vLLM'].map((tech) => (
                             <span key={tech} className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium">
                               {tech}
                             </span>
@@ -402,19 +406,19 @@ The app architecture follows iOS best practices with clean, modular code organiz
                         <ul className="space-y-2 text-gray-300 mb-4">
                           <li className="flex items-start">
                             <span className="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            Reduced quarterly engineering overhead by over 50 hours and significantly mitigated security risks by ensuring continuous compliance and eliminating vulnerable components from the production environment
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                             Developed a comprehensive Python script to programmatically scan project repositories, identify outdated dependencies using package manager APIs, and automate the version update process
                           </li>
                           <li className="flex items-start">
                             <span className="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                             Architected and deployed a multi-stage CI/CD pipeline in Azure DevOps that integrated the automation script, triggering validation checks on every commit to ensure system stability
                           </li>
-                          <li className="flex items-start">
-                            <span className="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Reduced quarterly engineering overhead by over 50 hours and significantly mitigated security risks by ensuring continuous compliance and eliminating vulnerable components
-                          </li>
                         </ul>
                         <div className="flex flex-wrap gap-2">
-                          {['Python', 'Azure DevOps', 'CI/CD', 'Git', 'API Integration'].map((tech) => (
+                          {['Python', 'Azure DevOps', 'CI/CD'].map((tech) => (
                             <span key={tech} className="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-sm font-medium">
                               {tech}
                             </span>
@@ -426,115 +430,7 @@ The app architecture follows iOS best practices with clean, modular code organiz
                 </div>
               </div>
 
-              {/* SummerNest */}
-              <div className="timeline-entry group fade-in relative">
-                {/* Timeline Dot */}
-                <div className="absolute left-6 md:left-[30%] md:-translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full border-4 border-white shadow-lg z-10"></div>
-                
-                {/* Content Container - All boxes on the right */}
-                <div className="ml-20 md:ml-[35%] md:w-[60%]">
-                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
-                    {/* Icon and Title - Always Visible */}
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-4 flex-shrink-0 shadow-lg overflow-hidden relative">
-                        <img src={hopkinsBird} alt="Hopkins Blue Jay" className="w-[4.5rem] h-[4.5rem] object-cover transform translate-y-0.5"/>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-white">Co-Founder & Full Stack Developer</h3>
-                        <p className="text-purple-300 font-medium">SummerNest | Jul 2024 - Dec 2024</p>
-                      </div>
-                    </div>
-                    
-                    {/* Short Description - Always Visible */}
-                    <p className="text-gray-300 mb-4">
-                      Student housing platform accepted into Johns Hopkins accelerator
-                    </p>
-                    
-                    {/* Content */}
-                    <div>
-                      <div className="pt-4 border-t border-white/20">
-                        <h4 className="font-semibold text-white mb-3">Achievements:</h4>
-                        <ul className="space-y-2 text-gray-300 mb-4">
-                          <li className="flex items-start">
-                            <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Built React.js platform with PostgreSQL backend
-                          </li>
-                          <li className="flex items-start">
-                            <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Interviewed 20+ stakeholders for market validation
-                          </li>
-                          <li className="flex items-start">
-                            <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Received $500 grant from "Spark" accelerator program
-                          </li>
-                        </ul>
-                        <div className="flex flex-wrap gap-2">
-                          {['React.js', 'Node.js', 'PostgreSQL', 'Express.js', 'JWT'].map((tech) => (
-                            <span key={tech} className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              {/* UW Medicine */}
-              <div className="timeline-entry group fade-in relative">
-                {/* Timeline Dot */}
-                <div className="absolute left-6 md:left-[30%] md:-translate-x-1/2 w-4 h-4 bg-cyan-500 rounded-full border-4 border-white shadow-lg z-10"></div>
-                
-                {/* Content Container - All boxes on the right */}
-                <div className="ml-20 md:ml-[35%] md:w-[60%]">
-                  <div className="timeline-card-modern bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
-                    {/* Icon and Title - Always Visible */}
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-4 flex-shrink-0 shadow-lg overflow-hidden">
-                        <img src={uwLogo} alt="UW Medicine" className="w-full h-full object-cover"/>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-white">Health Equity Data Scientist</h3>
-                        <p className="text-cyan-300 font-medium">UW Medicine | Jul 2022 - Sep 2023</p>
-                      </div>
-                    </div>
-                    
-                    {/* Short Description - Always Visible */}
-                    <p className="text-gray-300 mb-4">
-                      Analyzed physician survey data impacting 400,000+ clinicians
-                    </p>
-                    
-                    {/* Content */}
-                    <div>
-                      <div className="pt-4 border-t border-white/20">
-                        <h4 className="font-semibold text-white mb-3">Research Impact:</h4>
-                        <ul className="space-y-2 text-gray-300 mb-4">
-                          <li className="flex items-start">
-                            <span className="w-2 h-2 bg-cyan-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Analyzed national physician survey using R statistical computing
-                          </li>
-                          <li className="flex items-start">
-                            <span className="w-2 h-2 bg-cyan-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Published findings in peer-reviewed journal
-                          </li>
-                          <li className="flex items-start">
-                            <span className="w-2 h-2 bg-cyan-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            Presented research at national medical conference
-                          </li>
-                        </ul>
-                        <div className="flex flex-wrap gap-2">
-                          {['R', 'Statistical Analysis', 'Data Visualization', 'Healthcare Research'].map((tech) => (
-                            <span key={tech} className="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm font-medium">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -645,7 +541,6 @@ The app architecture follows iOS best practices with clean, modular code organiz
                 <div className="flex flex-wrap gap-2 mb-6">
                   <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm font-medium">Python</span>
                   <span className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm font-medium">PyTorch</span>
-                  <span className="bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full text-sm font-medium">Transformers</span>
                   <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm font-medium">BLEU</span>
                 </div>
                 <div className="flex gap-3">
@@ -735,125 +630,6 @@ The app architecture follows iOS best practices with clean, modular code organiz
                     Code
                   </a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Core Competencies Section */}
-      <section id="competencies" className="section bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-black/40"></div>
-        
-        <div className="container-custom relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center fade-in bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            Core Competencies
-          </h2>
-          
-          <div className="max-w-4xl mx-auto space-y-12">
-            <div className="fade-in competency-item">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                  <div className="w-1 h-8 bg-gradient-to-b from-cyan-400 to-blue-400 rounded-full"></div>
-                  Machine Learning & AI
-                </h3>
-                <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                  Production-scale AI optimization at Microsoft, accelerating LLM inference by 94.6% through custom TensorRT plugins and improving model accuracy by 98%. Pioneered innovative multi-LoRA deployment strategies for quantized models, implementing zero-padding techniques to overcome hardware operator limitations and enable dynamic adapter ranking. This breakthrough eliminated critical model loading bottlenecks and significantly improved service performance. Expert in Python, PyTorch, Azure AI Services, and production ML deployment.
-                </p>
-              </div>
-            </div>
-
-            <div className="fade-in competency-item">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                  <div className="w-1 h-8 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full"></div>
-                  Full-Stack Development
-                </h3>
-                <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                  Proficient in creating robust applications with a modern React.js, Node.js, and TypeScript stack, connected to databases like PostgreSQL and services like Firebase. Experience building scalable web platforms and RESTful APIs with focus on performance optimization and user experience.
-                </p>
-              </div>
-            </div>
-
-            <div className="fade-in competency-item">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                  <div className="w-1 h-8 bg-gradient-to-b from-blue-400 to-indigo-400 rounded-full"></div>
-                  Programming Fundamentals
-                </h3>
-                <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                  Strong foundational knowledge of Java, C++, and Python, with expertise in Data Structures, Algorithms, and Object-Oriented Programming. Proven ability to write efficient, maintainable code across multiple paradigms and platforms.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Interests Section */}
-      <section id="interests" className="section bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-black/40"></div>
-        
-        <div className="container-custom relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center fade-in bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Interests & Hobbies
-          </h2>
-          
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Tennis */}
-            <div className="fade-in interest-card">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 h-full">
-                <div className="text-6xl mb-4 text-center">🎾</div>
-                <h3 className="text-2xl font-bold text-white mb-4 text-center">Tennis</h3>
-                <p className="text-gray-300 leading-relaxed text-center">
-                  Passionate about tennis, enjoying both recreational play and following professional tournaments. The sport teaches discipline, strategy, and mental resilience.
-                </p>
-              </div>
-            </div>
-
-            {/* Golf */}
-            <div className="fade-in interest-card">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 h-full">
-                <div className="text-6xl mb-4 text-center">⛳</div>
-                <h3 className="text-2xl font-bold text-white mb-4 text-center">Golf</h3>
-                <p className="text-gray-300 leading-relaxed text-center">
-                  Find golf to be the perfect blend of precision, patience, and strategic thinking. Each round presents unique challenges and opportunities for improvement.
-                </p>
-              </div>
-            </div>
-
-            {/* Trading */}
-            <div className="fade-in interest-card">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 h-full">
-                <div className="text-6xl mb-4 text-center">📈</div>
-                <h3 className="text-2xl font-bold text-white mb-4 text-center">Discretionary Trading</h3>
-                <p className="text-gray-300 leading-relaxed text-center">
-                  Engage in discretionary trading, combining technical analysis with market intuition. Fascinated by market psychology and risk management strategies.
-                </p>
-              </div>
-            </div>
-
-            {/* Investing */}
-            <div className="fade-in interest-card">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 h-full">
-                <div className="text-6xl mb-4 text-center">💰</div>
-                <h3 className="text-2xl font-bold text-white mb-4 text-center">Investing</h3>
-                <p className="text-gray-300 leading-relaxed text-center">
-                  Long-term investor with interest in fundamental analysis, portfolio diversification, and understanding economic trends that drive market movements.
-                </p>
-              </div>
-            </div>
-
-            {/* Mountaineering */}
-            <div className="fade-in interest-card md:col-span-2 lg:col-span-1">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 h-full">
-                <div className="text-6xl mb-4 text-center">🏔️</div>
-                <h3 className="text-2xl font-bold text-white mb-4 text-center">Mountaineering</h3>
-                <p className="text-gray-300 leading-relaxed text-center">
-                  Love the challenge and adventure of mountaineering. The sport demands physical endurance, mental toughness, and careful planning - skills that translate to many areas of life.
-                </p>
               </div>
             </div>
           </div>
